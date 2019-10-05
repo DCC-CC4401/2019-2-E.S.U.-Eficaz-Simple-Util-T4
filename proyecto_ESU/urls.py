@@ -19,5 +19,7 @@ from modelo_usuarios import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-	path('', views.home_user)
+	path('', views.home_unsigned),
+	path('home/', views.home_user),
+	path('profile/', views.user_profile)
 ]
