@@ -1,7 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
+from numpy import std
 
 # Create your models here.
+
+'''
+Usuario (#correo, nombre, apellido, foto, contraseña, rol, tiempo conexión)
+
+Actividades (#U.correo, nombre, descripción, categoría, fecha, hora inicio, duración)
+
+Templates (#U.correo, nombre, descripción, categoría)
+
+Amigos (#U.correo, correo_amigo)
+
+Estadísticas (#U.correo, #categoría, tiempo, desviación estándar)
+'''
 
 class Profile(models.Model):
     '''
@@ -32,7 +45,8 @@ class Activity(models.Model):
     category = models.ForeignKey(Category)
     date = models.DateField(auto_now=True)
     start_time = models.TimeField(auto_now=True)
-    end_time = models.TimeField() # duracion = end-start!
+    end_time = models.TimeField() # duracion = end-start !
+
 
 class ActivityTemplate(models.Model):
     '''
@@ -53,3 +67,12 @@ class Friend(models.Model):
     '''
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     friend = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+class Stats(models.Model):
+    '''
+    Some statistics for the activities of the user
+    '''
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    activity = models.ForeignKey(Activity) # on_delete= cascade??
+    lasted = activity.end_time - activity.start_time
+    #std =
