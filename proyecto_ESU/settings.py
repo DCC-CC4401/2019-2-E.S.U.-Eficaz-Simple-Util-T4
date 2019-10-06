@@ -124,3 +124,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/bootstrap"),
     os.path.join(BASE_DIR, "static/Prototypes"),
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# UPLOAD SIZE for profile photos
+
+CONTENT_TYPES = ['image']
+MAX_UPLOAD_SIZE = "10485760"
