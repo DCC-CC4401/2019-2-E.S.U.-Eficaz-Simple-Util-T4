@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Perfil de Usuario</title>
     <!-- BOOTSTRAP CSS, DO NOT DELETE -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <link rel="stylesheet" href={% static "css/bootstrap.min.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "css/custom.css" %}>
 </head>
 
 <body>
@@ -20,18 +21,18 @@
             <h1>LOGO</h1>
         </div>
         <div class="text-center py-3">
-            <img src="img/turing.jpg" class="avatar px-2 py-2">
+            <img src={% static "img/turing.jpg" %} class="avatar px-2 py-2">
             <p class="h6">Bienvenido, <br> Nombre de usuario</p>
         </div>
         <ul class="list-unstyled components text-left">
             <li>
-                <a href="../Prototypes/LandingPage.html">Inicio</a>
+                <a href={% static "Prototypes/LandingPage.html"%}>Inicio</a>
             </li>
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Perfil</a>
                 <ul class="collapse list-unstyled text-left" id="pageSubmenu">
                     <li>
-                        <a href="../Prototypes/UserProfile.html">Mi Perfil</a>
+                        <a href={% static "Prototypes/UserProfile.html" %}>Mi Perfil</a>
                     </li>
                     <li>
                         <a href="#">Seguridad</a>
@@ -58,7 +59,7 @@
     <!--CONTENIDO PAGINA-->
     <div class="container-fluid p-4 main">
         <div class="row">
-            <img src="img/turing.jpg" class="circular mx-auto d-block shadow" height="250px">
+            <img src={% static "img/turing.jpg"%} class="circular mx-auto d-block shadow" height="250px">
         </div>
         <div class="row py-4">
             <div class="col text-center">
@@ -320,35 +321,35 @@
 
                     <div class="card spaced">
                         <div class="card-body sleep-activity text-white">
-                            <img src="img/bed.png" class="activity-icon invert-color mx-2"> Dormir
+                            <img src={% static "img/bed.png" %} class="activity-icon invert-color mx-2"> Dormir
                             <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
                         </div>
                     </div>
 
                     <div class="card spaced">
                         <div class="card-body study-activity text-white">
-                            <img src="img/open-book.png" class="activity-icon invert-color mx-2"> Estudiar
+                            <img src={% static "img/open-book.png" %} class="activity-icon invert-color mx-2"> Estudiar
                             <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
                         </div>
                     </div>
 
                     <div class="card spaced">
                         <div class="card-body eat-activity text-white">
-                            <img src="img/crossed-knife-and-fork.png" class="activity-icon invert-color mx-2"> Almorzar
+                            <img src={% static "img/crossed-knife-and-fork.png" %} class="activity-icon invert-color mx-2"> Almorzar
                             <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
                         </div>
                     </div>
 
                     <div class="card spaced">
                         <div class="card-body house-activity text-white">
-                            <img src="img/washing-machine.png" class="activity-icon invert-color mx-2"> Lavar ropa
+                            <img src={% static "img/washing-machine.png" %} class="activity-icon invert-color mx-2"> Lavar ropa
                             <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
                         </div>
                     </div>
 
                     <div class="card spaced">
                         <div class="card-body animal-activity text-white">
-                            <img src="img/snowshoe-cat.png" class="activity-icon invert-color mx-2"> Jugar con el Michi
+                            <img src={% static "img/snowshoe-cat.png" %} class="activity-icon invert-color mx-2"> Jugar con el Michi
                             <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
                         </div>
                     </div>
@@ -368,8 +369,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/toggleName.js"></script>
+<script src={% static "js/bootstrap.min.js" %}></script>
+<script src={% static "js/toggleName.js" %}></script>
 </body>
 
 </html>
