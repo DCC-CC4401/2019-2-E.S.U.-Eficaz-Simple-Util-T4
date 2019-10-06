@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Avg
 from numpy import std
 
 # Create your models here.
@@ -45,7 +46,8 @@ class Activity(models.Model):
     category = models.ForeignKey(Category)
     date = models.DateField(auto_now=True)
     start_time = models.TimeField(auto_now=True)
-    end_time = models.TimeField() # duracion = end-start !
+    end_time = models.TimeField()
+    lasted = end_time-start_time
 
 
 class ActivityTemplate(models.Model):
@@ -68,11 +70,20 @@ class Friend(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     friend = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
+
+
 class Stats(models.Model):
     '''
     Some statistics for the activities of the user
     '''
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    activity = models.ForeignKey(Activity) # on_delete= cascade??
-    lasted = activity.end_time - activity.start_time
-    #std =
+    category = models.ForeignKey(Category, on_delete=models.CASCADE) # on_delete= cascade??
+
+
+    # Hay que probar esto!!
+
+    def mean_time(self):
+        return Activity.objects.all().filter(category=self.category).aggregate(Avg('lasted'))
+
+    def std(self):
+        return Activity.objects.all().filter(category=self.category).aggregate(std('lasted'))
