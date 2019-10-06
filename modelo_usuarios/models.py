@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Avg
-from numpy import std
+from django.db.models import Avg, StdDev
+from django.test import TestCase
+from django.utils.datetime_safe import datetime, new_datetime
 
 # Create your models here.
 
@@ -17,12 +18,13 @@ Amigos (#U.correo, correo_amigo)
 Estadísticas (#U.correo, #categoría, tiempo, desviación estándar)
 '''
 
+
 class Profile(models.Model):
     '''
     Profile fields
     '''
-    user = models.OneToOneField(User, on_delete=models.CASCADE) # username, password, email, first_name, last_name
-    tiempo_conexion = models.DateField(auto_now=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)  # username, password, email, first_name, last_name
+    # tiempo_conexion = models.DateField(auto_now=True)  ---> está implementado en DJANGO
 
 
 class Category(models.Model):
@@ -45,9 +47,9 @@ class Activity(models.Model):
     description = models.CharField(max_length=500)
     category = models.ForeignKey(Category)
     date = models.DateField(auto_now=True)
-    start_time = models.TimeField(auto_now=True)
-    end_time = models.TimeField()
-    lasted = end_time-start_time
+    start_time = models.TimeField(auto_now_add=True)
+    end_time = models.TimeField(blank=True)
+    lasted = end_time - start_time
 
 
 class ActivityTemplate(models.Model):
@@ -61,6 +63,7 @@ class ActivityTemplate(models.Model):
     description = models.CharField(max_length=500)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
+
 class Friend(models.Model):
     '''
     A friend of the user
@@ -71,19 +74,20 @@ class Friend(models.Model):
     friend = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
 
-
 class Stats(models.Model):
     '''
     Some statistics for the activities of the user
     '''
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE) # on_delete= cascade??
-
-
-    # Hay que probar esto!!
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)  # on_delete= cascade??
 
     def mean_time(self):
         return Activity.objects.all().filter(category=self.category).aggregate(Avg('lasted'))
 
     def std(self):
-        return Activity.objects.all().filter(category=self.category).aggregate(std('lasted'))
+        return Activity.objects.all().filter(category=self.category).aggregate(StdDev('lasted'))
+
+
+
+
+
