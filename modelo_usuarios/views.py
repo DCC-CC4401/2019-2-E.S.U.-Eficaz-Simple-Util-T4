@@ -48,3 +48,10 @@ def user_profile(request):
 	"""
 	
 	return render(request, "UserProfile.html")
+
+def user_register(request):
+	"""
+	Logic for the user register page goes here
+	"""
+
+	return render(request, "Registration_page.html")
