@@ -39,6 +39,7 @@ class Category(models.Model):
     A category table must exist to avoid non wanted behavior like category=Correr, category=corriendo, ... have only 1 category
     '''
     category = models.CharField(max_length=150)
+	
 class Activity(models.Model):
     '''
     Activity fields

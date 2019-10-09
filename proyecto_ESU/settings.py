@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'modelo_usuarios',
+	
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/bootstrap"),
     os.path.join(BASE_DIR, "static/Prototypes"),
 ]
+
