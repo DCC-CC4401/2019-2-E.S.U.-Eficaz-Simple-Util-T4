@@ -26,7 +26,7 @@ class Profile(models.Model):
     Profile fields
     '''
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # username, password, email, first_name, last_name
-    profile_photo = models.ImageField(upload_to=profile_photo_path, null=False)
+    profile_photo = models.ImageField(upload_to=profile_photo_path, null=True)
     # tiempo_conexion = models.DateField(auto_now=True)  ---> está implementado en DJANGO
 
 
@@ -39,8 +39,7 @@ class Category(models.Model):
     A category table must exist to avoid non wanted behavior like category=Correr, category=corriendo, ... have only 1 category
     '''
     category = models.CharField(max_length=150)
-
-
+	
 class Activity(models.Model):
     '''
     Activity fields
@@ -48,11 +47,11 @@ class Activity(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
     description = models.CharField(max_length=500)
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date = models.DateField(auto_now=True)
     start_time = models.TimeField(auto_now_add=True)
     end_time = models.TimeField(blank=True)
-    lasted = end_time - start_time
+    #lasted = end_time - start_time #TODO Timefields cannot be substracted move this elsewhere
 
 
 class ActivityTemplate(models.Model):
@@ -74,7 +73,7 @@ class Friend(models.Model):
     He's also an user
     '''
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    friend = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    friend = models.CharField(max_length=150)	#It cannot reference the same key, need to define what we will use to identify a friend
 
 
 class Stats(models.Model):
