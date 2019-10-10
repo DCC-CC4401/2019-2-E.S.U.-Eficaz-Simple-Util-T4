@@ -1,8 +1,11 @@
+
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Avg, StdDev
 
 # Create your models here.
+from django.utils import timezone
 
 '''
 Usuario (#correo, nombre, apellido, foto, contraseña, rol, tiempo conexión)
@@ -48,11 +51,10 @@ class Activity(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
     description = models.CharField(max_length=500)
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date = models.DateField(auto_now=True)
     start_time = models.TimeField(auto_now_add=True)
-    end_time = models.TimeField(blank=True)
-    lasted = end_time - start_time
+    #elapsed =
 
 
 class ActivityTemplate(models.Model):
@@ -73,8 +75,8 @@ class Friend(models.Model):
 
     He's also an user
     '''
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    friend = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='friend')
+    friend = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='aFriend')
 
 
 class Stats(models.Model):
