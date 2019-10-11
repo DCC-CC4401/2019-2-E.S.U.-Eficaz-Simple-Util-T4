@@ -10,4 +10,5 @@ venv/*
 # MAC OS
 .DS_Store
 
+*.sqlite3
 *.pyc
