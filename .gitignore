@@ -9,3 +9,5 @@ venv/*
 
 # MAC OS
 .DS_Store
+
+*.pyc

@@ -1,7 +1,11 @@
+from django.contrib import messages
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
-from .forms import LogSession
+from .forms import LogSession, CustomUserCreationForm
+from django.contrib.auth.models import User
+
+
 
 # Create your views here.
 
@@ -45,5 +49,13 @@ def user_register(request):
 	"""
 	Logic for the user register page goes here
 	"""
-
+	if request.method == 'POST':
+		f = CustomUserCreationForm(request.POST)
+		print(f)
+		if f.is_valid():
+			f.save()
+			return redirect('http://127.0.0.1:8000/home/')
+	else:
+		print(':c')
+		f = CustomUserCreationForm()
 	return render(request, "Registration_page.html")
