@@ -16,9 +16,9 @@ myApp.directive('durationInput', function() {
     require: 'ngModel',
     link: function(scope, element, attrs, ngModelCtrl) {
       getDisplayValue = function(value){
-        var duration =  moment.duration(value, 'seconds');  
-        minutes =  duration.minutes();
-        seconds =  duration.seconds();
+        let duration =  moment.duration(value, 'seconds');  
+        let minutes =  duration.minutes();
+        let seconds =  duration.seconds();
         if(minutes < 10){
           minutes = "0" + minutes
         }
