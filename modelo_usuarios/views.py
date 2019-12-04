@@ -29,7 +29,6 @@ def home_user(request):
 	Logic for the logged account's landing page goes here
 	"""
 	
-	
 	return render(request, "LandingPage_logeado.html")
 	
 
@@ -38,8 +37,15 @@ def user_profile(request):
 	"""
 	Logic for the user profile page goes here
 	"""
+	##Test this by connecting through "jalmarza@gmail.com"/"real_human" user
+	current = request.user #Retrieve current user
+	context = {'username': current.username, 
+			 'first_name': current.first_name,
+			 'last_name': current.last_name,
+			 'email': current.email,
+			 }
 	
-	return render(request, "UserProfile.html")
+	return render(request, "UserProfile.html", context)
 	
 def user_register(request):
 	"""

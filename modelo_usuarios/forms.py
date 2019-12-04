@@ -11,7 +11,6 @@ class LogSession(forms.Form):
 	email = forms.CharField(max_length=255)
 	password = forms.CharField(max_length=255)
 
-	
 	def clean(self):
 		user = self.authenticate_email()
 		if not user:
