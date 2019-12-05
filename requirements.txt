@@ -1,5 +1,5 @@
 decorator==4.4.0
-Django==2.2.6
+Django==2.2.8
 numpy==1.17.2
 Pillow==6.2.0
 public==2019.4.13
