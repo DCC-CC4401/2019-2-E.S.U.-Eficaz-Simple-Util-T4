@@ -12,4 +12,4 @@ venv/*
 
 *.sqlite3
 *.pyc
-*.pyc
+
