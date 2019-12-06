@@ -63,5 +63,5 @@ def user_register(request):
 	context = {
 		'form': f
 	}
-	return render(request, "NewRegistration_page.html", context)
+	return render(request, "Registration_page.html", context)
 
