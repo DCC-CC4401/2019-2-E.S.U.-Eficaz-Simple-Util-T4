@@ -126,4 +126,3 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/bootstrap"),
     os.path.join(BASE_DIR, "static/Prototypes"),
 ]
-

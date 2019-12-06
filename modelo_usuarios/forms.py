@@ -3,6 +3,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
+from .models import Profile
+
 
 
 # Forms used go here
@@ -36,11 +38,12 @@ class LogSession(forms.Form):
 
 
 class CustomUserCreationForm(forms.Form):
-    first_name = forms.CharField(label='Enter first name', min_length=4, max_length=150)
-    last_name = forms.CharField(label='Enter last name', min_length=4, max_length=150)
+    first_name = forms.CharField(label='Enter first name',  max_length=256)
+    last_name = forms.CharField(label='Enter last name', max_length=256)
     email = forms.EmailField(label='Enter email')
     password1 = forms.CharField(label='Enter password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+    profilePicture = forms.ImageField(label='imagen de usuario')
     def clean_first_name(self):
         first_name = self.cleaned_data['first_name']
 
@@ -67,12 +70,18 @@ class CustomUserCreationForm(forms.Form):
 
         return password2
 
+    def clean_image(self):
+        image = self.cleaned_data.get('profilePicture')
+        return image
+
     def save(self, commit=True):
         user = User.objects.create_user(
             username=self.clean_email(),
+            email=self.cleaned_data['email'],
+            password=self.cleaned_data['password1'],
             first_name=self.cleaned_data['first_name'],
             last_name=self.cleaned_data['last_name'],
-            email=self.cleaned_data['email'],
-            password=self.cleaned_data['password1']
         )
+        profile = Profile.objects.create(user=user, profile_photo=self.cleaned_data['profilePicture'])
+        profile.save()
         return user

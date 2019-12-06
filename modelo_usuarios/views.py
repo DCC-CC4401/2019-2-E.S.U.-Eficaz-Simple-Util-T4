@@ -44,18 +44,24 @@ def user_profile(request):
 	"""
 	
 	return render(request, "UserProfile.html")
-	
+
+
 def user_register(request):
 	"""
 	Logic for the user register page goes here
 	"""
 	if request.method == 'POST':
-		f = CustomUserCreationForm(request.POST)
+		f = CustomUserCreationForm(request.POST, request.FILES)
 		print(f)
 		if f.is_valid():
+			print('valid')
 			f.save()
 			return redirect('http://127.0.0.1:8000/home/')
 	else:
 		print(':c')
 		f = CustomUserCreationForm()
-	return render(request, "Registration_page.html")
+	context = {
+		'form': f
+	}
+	return render(request, "NewRegistration_page.html", context)
+
