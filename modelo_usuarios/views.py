@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
+from .models import Profile
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from .forms import LogSession
 
 # Create your views here.
@@ -29,7 +31,6 @@ def home_user(request):
 	Logic for the logged account's landing page goes here
 	"""
 	
-	
 	return render(request, "LandingPage_logeado.html")
 	
 
@@ -38,8 +39,23 @@ def user_profile(request):
 	"""
 	Logic for the user profile page goes here
 	"""
+	##Test this by connecting through "jalmarza@gmail.com"/"real_human" user
+	current = request.user 									
+	profile = Profile.objects.filter(user = current)[0]	#Obtain user profile
 	
-	return render(request, "UserProfile.html")
+	if not profile.profile_photo:	#Empty Image Field, loads default sprite
+		img_path = static("img/avatar.png")		
+	else:
+		img_path = static(profile.profile_photo.path)
+	
+	context = {'username': current.username, 
+			 'first_name': current.first_name,
+			 'last_name': current.last_name,
+			 'email': current.email,
+			 'img_src': img_path
+			 }
+	
+	return render(request, "UserProfile.html", context)
 	
 def user_register(request):
 	"""
