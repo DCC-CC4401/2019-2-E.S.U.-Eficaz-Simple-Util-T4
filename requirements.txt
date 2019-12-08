@@ -1,7 +1,7 @@
 Django==2.2.8
 numpy==1.17.2
-Pillow==6.2.0
+Pillow==6.2.1
 public==2019.4.13
-pytz==2019.2
+pytz==2019.3
 self==2019.4.13
 sqlparse==0.3.0

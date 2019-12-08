@@ -3,7 +3,7 @@
 
 # Pycharm stuff
 .idea/*
-__pycache__/
+__pycache__/*add
 
 # Virtual Environments
 venv/*
