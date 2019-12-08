@@ -75,7 +75,7 @@ class Friend(models.Model):
 
     He's also an user
     '''
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='friend')
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='theUser')
     friend = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='aFriend')
 
 
