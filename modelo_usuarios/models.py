@@ -1,5 +1,3 @@
-
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Avg, StdDev
@@ -24,12 +22,13 @@ def profile_photo_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/photo/user_<id>/<filename>
     return 'profile_photo/user_{0}/{1}'.format(instance.usuario.id, filename)
 
+
 class Profile(models.Model):
     '''
     Profile fields
     '''
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # username, password, email, first_name, last_name
-    profile_photo = models.ImageField(upload_to=profile_photo_path, null=False)
+    profile_photo = models.ImageField(upload_to=profile_photo_path, null=True)
     # tiempo_conexion = models.DateField(auto_now=True)  ---> está implementado en DJANGO
 
 
@@ -54,7 +53,8 @@ class Activity(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date = models.DateField(auto_now=True)
     start_time = models.TimeField(auto_now_add=True)
-    #elapsed =
+    end_time = models.TimeField(blank=True)
+    # lasted = end_time - start_time #TODO Timefields cannot be substracted move this elsewhere
 
 
 class ActivityTemplate(models.Model):
@@ -91,8 +91,3 @@ class Stats(models.Model):
 
     def std(self):
         return Activity.objects.all().filter(category=self.category).aggregate(StdDev('lasted'))
-
-
-
-
-

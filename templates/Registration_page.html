@@ -5,7 +5,7 @@
     <title>Time Tracker &mdash; E.S.U.</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href={% static "fonts/icomoon/style.css" %}>
 
@@ -18,15 +18,16 @@
     <link rel="stylesheet" href={% static "css/jquery.fancybox.min.css"%}>
 
     <link rel="stylesheet" href={% static "css/bootstrap-datepicker.css"%}>
- 
+
     <link rel="stylesheet" href={% static "fonts/flaticon/font/flaticon.css"%}>
-  
+
     <link rel="stylesheet" href={% static "css/aos.css"%}>
- 
+
     <link rel="stylesheet" href={% static "css/style.css"%}>
-    
+
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
 
   <div class="site-wrap">
 
@@ -38,7 +39,7 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div>
-   
+
     <div id="sticky-wrapper" class="sticky-wrapper" style="height: 48px;">
       <header class="site-navbar js-sticky-header site-navbar-target" role="banner" style="">
 
@@ -46,57 +47,34 @@
          <div class="row align-items-center">
 
            <div class="col-6 col-xl-2">
-             <h1 class="mb-0 site-logo"><a href="./" class="h2 mb-0">ESU<span class="h2 mb-0">.</span> </a></h1>
+             <h1 class="mb-0 site-logo"><a href="../" class="h2 mb-0">ESU<span class="h2 mb-0">.</span> </a></h1>
            </div>
          </div>
        </div>
 
       </header>
     </div>
+  </div>
 
 
-    <div class="site-blocks-cover overlay" style="background-image: url(images/hero_2.jpg);" data-aos="fade" id="home-section">
 
-        <div class="row align-items-center justify-content-center">
+    <div class="container" style="margin: auto; padding: 50px" >
 
-               <form method="POST" class="text-center text-dark" style="width: 450px;height: 626px;margin: 0px;padding: 20px;filter: blur(0px) brightness(100%); float: right">
-				{% csrf_token %}
-                <h1>ESU TimeTracker!!</h1>
-                <input class="form-control" type="email" name="email" placeholder="Email" style="height: 60px; width: 400px; margin: 10px; " />
-                <input class="form-control" type="password" name="password" placeholder="Password" style="height: 60px; width: 400px; margin: 10px; "/>
-                <button class="btn btn-primary" type="submit" style="width: 400px;color: #000000;font-size: 19px;">Ingresar</button>
-                <a href="./register" >Crear cuenta</a></form>
-
-          </div>
-
-        </div>
+      <div class="container" style = "margin: auto;" >
+               <form style="border-radius: 30px;border-style:solid;border-color: #8cc8f9
+               ;width: 465px;height: 620px;margin: auto;padding: 20px;filter: blur(0px) brightness(100%);">
+                <h1 class="text-center">Registrate!</h1>
+                <input class="form-control" type="nombre" name="nombre" placeholder="Nombre" style="padding-left: 10px;background-color: #c9cbff;border-radius: 10px;height: 60px; width: 400px; margin: 10px; " />
+                <input  class="form-control" type="apellido" name="apellido" placeholder="Apellido" style="padding-left: 10px;background-color: #c9cbff;border-radius: 10px;height: 60px; width: 400px; margin: 10px; " />
+                <input class="form-control" type="email" name="Email" placeholder="Email" style="padding-left: 10px;background-color: #c9cbff;border-radius: 10px;height: 60px; width: 400px; margin: 10px;" />
+                <input class="form-control" type="password" name="password" placeholder="Contraseña" style="padding-left: 10px;background-color: #c9cbff;border-radius: 10px;height: 60px; width: 400px; margin: 10px; "/>
+                <input class="form-control" type="password" name="confirm_password" placeholder="Confirmar Contraseña" style="padding-left: 10px;background-color: #c9cbff;border-radius: 10px;height: 60px; width: 400px; margin: 10px;"/>
+                <button class="btn btn-primary" type="button" style="margin-bottom: 50px;margin-left: 10px;width: 400px;color: #000000;font-size: 19px;">Seleccionar Foto de Perfil</button>
+                <button class="btn btn-primary" type="button" style="margin-left: 10px;width: 400px;color: #000000;font-size: 19px;">Registrarse</button>
+                </form>
       </div>
-
-      <a href="#about-section" class="mouse smoothscroll">
-        <span class="mouse-icon">
-          <span class="mouse-wheel"></span>
-        </span>
-      </a>
     </div>
 
-
-    <div class="site-section cta-big-image" id="about-section">
-      <div class="container">
-        <div class="row mb-5 justify-content-center">
-          <div class="col-md-8 text-center">
-            <h2 class="section-title mb-3" data-aos="fade-up" data-aos-delay="">¿De que trata?</h2>
-            <p class="lead" data-aos="fade-up" data-aos-delay="100">ESU TimeTracker,
-              es una aplicación que tiene como objetivo mejorar la calidad de vida del usuario en base a
-              análisis estadísticos del uso de su tiempo. Para esto el usuario proporcionará informacion sobre el
-              uso de su tiempo, el cual será recopilado, para que así, el usuario pueda ver un resumen de los tiempos
-              registrados por categoría..</p>
-          </div>
-        </div>
-
-      </div>  
-    </div>
-
-  </div> <!-- .site-wrap -->
 
   <script src={% static "js/jquery-3.3.1.min.js"%}></script>
   <script src={% static "js/jquery-ui.js"%}></script>
@@ -110,9 +88,5 @@
   <script src={% static "js/jquery.sticky.js"%}></script>
   <script src={% static "js/isotope.pkgd.min.js"%}></script>
 
-  
-  <script src={% static "js/main.js"%}></script>
-
-  
   </body>
 </html>

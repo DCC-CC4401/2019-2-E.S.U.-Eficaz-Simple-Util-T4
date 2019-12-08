@@ -7,65 +7,67 @@ import modelo_usuarios.models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
-    operations = [
-        migrations.CreateModel(
-            name='Category',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('category', models.CharField(max_length=150)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Profile',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('profile_photo', models.ImageField(upload_to=modelo_usuarios.models.profile_photo_path)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Stats',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modelo_usuarios.Category')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modelo_usuarios.Profile')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Friend',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('friend', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='aFriend', to='modelo_usuarios.Profile')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='friend', to='modelo_usuarios.Profile')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='ActivityTemplate',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=150)),
-                ('description', models.CharField(max_length=500)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modelo_usuarios.Category')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modelo_usuarios.Profile')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Activity',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=150)),
-                ('description', models.CharField(max_length=500)),
-                ('date', models.DateField(auto_now=True)),
-                ('start_time', models.TimeField(auto_now_add=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modelo_usuarios.Category')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modelo_usuarios.Profile')),
-            ],
-        ),
-    ]
+
+operations = [
+    migrations.CreateModel(
+        name='Category',
+        fields=[
+            ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+            ('category', models.CharField(max_length=150)),
+        ],
+    ),
+    migrations.CreateModel(
+        name='Profile',
+        fields=[
+            ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+            ('profile_photo', models.ImageField(upload_to=modelo_usuarios.models.profile_photo_path)),
+            ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+        ],
+    ),
+    migrations.CreateModel(
+        name='Stats',
+        fields=[
+            ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+            ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modelo_usuarios.Category')),
+            ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modelo_usuarios.Profile')),
+        ],
+    ),
+    migrations.CreateModel(
+        name='Friend',
+        fields=[
+            ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+            ('friend', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='aFriend',
+                                         to='modelo_usuarios.Profile')),
+            ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='friend',
+                                       to='modelo_usuarios.Profile')),
+        ],
+    ),
+    migrations.CreateModel(
+        name='ActivityTemplate',
+        fields=[
+            ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+            ('name', models.CharField(max_length=150)),
+            ('description', models.CharField(max_length=500)),
+            ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modelo_usuarios.Category')),
+            ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modelo_usuarios.Profile')),
+        ],
+    ),
+    migrations.CreateModel(
+        name='Activity',
+        fields=[
+            ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+            ('name', models.CharField(max_length=150)),
+            ('description', models.CharField(max_length=500)),
+            ('date', models.DateField(auto_now=True)),
+            ('start_time', models.TimeField(auto_now_add=True)),
+            ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modelo_usuarios.Category')),
+            ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='modelo_usuarios.Profile')),
+        ],
+    ),
+]
