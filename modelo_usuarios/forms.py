@@ -38,7 +38,7 @@ class LogSession(forms.Form):
 
 
 class CustomUserCreationForm(forms.Form):
-    first_name = forms.CharField(label='Enter first name',  max_length=256)
+    first_name = forms.CharField(label='Enter first name',  max_length=256, widget=forms.TextInput(attrs={'class' : 'myfieldclass'}))
     last_name = forms.CharField(label='Enter last name', max_length=256)
     email = forms.EmailField(label='Enter email')
     password1 = forms.CharField(label='Enter password', widget=forms.PasswordInput)

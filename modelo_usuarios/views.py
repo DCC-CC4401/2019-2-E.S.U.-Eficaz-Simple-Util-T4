@@ -52,13 +52,10 @@ def user_register(request):
 	"""
 	if request.method == 'POST':
 		f = CustomUserCreationForm(request.POST, request.FILES)
-		print(f)
 		if f.is_valid():
-			print('valid')
 			f.save()
-			return redirect('http://127.0.0.1:8000/home/')
+			return render(request, "Successful_registration.html")
 	else:
-		print(':c')
 		f = CustomUserCreationForm()
 	context = {
 		'form': f
