@@ -1,3 +1,4 @@
+
 from django.db.models import Q
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
@@ -33,3 +34,27 @@ class LogSession(forms.Form):
 			except ObjectDoesNotExist:
 				pass
 		return None
+
+class ChangeAvatar(forms.Form):
+	photo = forms.ImageField(label='', required=False, widget=forms.ClearableFileInput(
+		attrs={
+			'id': 'files',
+			'onchange': 'this.form.submit()',
+		}
+	)
+	)
+
+class changePass(forms.Form):
+	old_pass = forms.CharField(label='Contraseña actual', widget=forms.PasswordInput(
+		attrs={'class': 'form_control',
+			   'placeholder': "contraseña nueva"}
+	))
+	new_pass = forms.CharField(label='Contraseña nueva', widget=forms.PasswordInput(
+		attrs={'class': 'form_control',
+			   'placeholder': "repita contraseña"}
+	))
+	confirm_pass = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput(
+		attrs={'class': 'form_control',
+			   'placeholder': "***********"}
+	))
+

@@ -1,9 +1,18 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import get_user
 from django.shortcuts import redirect
-from .models import Profile
+
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from .forms import LogSession
+from .forms import ChangeAvatar
+
+from django.contrib import messages
+from django.contrib.auth.models import User
+
+
+from .models import Profile
+
 
 # Create your views here.
 
@@ -63,3 +72,21 @@ def user_register(request):
 	"""
 
 	return render(request, "Registration_page.html")
+
+def new_photo(request):
+	if request.method == 'POST':
+		formp = ChangeAvatar(request.POST, request.FILES)
+		if formp.is_valid():
+			(newph, created) = User.objects.get_or_create(user=get_user(request))
+			newph.image = formp.cleaned_data['photo']
+			newph.save()
+			messages.success(request, '¡se modificó su foto de perfil exitosamente!')
+			return render(request, "UserProfile.html", {'formp': formp})
+		messages.warning(
+			request,
+			'Error, reintentelo'
+		)
+	return render(request, "UserProfile.html", {'formp': formp})
+
+
+

@@ -22,5 +22,6 @@ urlpatterns = [
 	path('', views.home_unsigned),
 	path('home/', views.home_user),
 	path('profile/', views.user_profile),
-	path('register/', views.user_register)
+	path('register/', views.user_register),
+	path('photo/', views.new_photo)
 ]
