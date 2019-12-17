@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.template import RequestContext
+from .models import Profile
 
 # Forms used go here
 
@@ -39,10 +40,8 @@ class ChangeAvatar(forms.Form):
 	photo = forms.ImageField(label='', required=False, widget=forms.ClearableFileInput(
 		attrs={
 			'id': 'files',
-			'onchange': 'this.form.submit()',
-		}
-	)
-	)
+			'onchange': 'this.form.submit()'}
+	))
 
 class changePass(forms.Form):
 	old_pass = forms.CharField(label='Contraseña actual', widget=forms.PasswordInput(

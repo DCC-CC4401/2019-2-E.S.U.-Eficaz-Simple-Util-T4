@@ -1,3 +1,5 @@
+from django.conf.urls.static import static
+from django.conf import settings
 """proyecto_ESU URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -22,6 +24,6 @@ urlpatterns = [
 	path('', views.home_unsigned),
 	path('home/', views.home_user),
 	path('profile/', views.user_profile),
-	path('register/', views.user_register),
-	path('photo/', views.new_photo)
+	path('register/', views.user_register)
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

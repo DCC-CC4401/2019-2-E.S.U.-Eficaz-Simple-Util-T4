@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user
+from django.db.models.signals import post_save
 from django.shortcuts import redirect
-
+from django.http import HttpResponseRedirect
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from .forms import LogSession
 from .forms import ChangeAvatar
@@ -55,15 +56,26 @@ def user_profile(request):
 	if not profile.profile_photo:	#Empty Image Field, loads default sprite
 		img_path = static("img/avatar.png")		
 	else:
-		img_path = static(profile.profile_photo.path)
-	
-	context = {'username': current.username, 
-			 'first_name': current.first_name,
-			 'last_name': current.last_name,
-			 'email': current.email,
-			 'img_src': img_path
-			 }
-	
+		img_path = 'http://127.0.0.1:8000/'+'profile_photo/'+str(profile.profile_photo)
+
+
+	if request.method == 'POST':
+		formp = ChangeAvatar(request.POST, request.FILES)
+		if formp.is_valid():
+			(us, created) = Profile.objects.get_or_create(user=get_user(request))
+			us.profile_photo = formp.cleaned_data['photo']
+			us.save()
+			return HttpResponseRedirect('http://127.0.0.1:8000/profile')
+
+	formp = ChangeAvatar()
+	context = {'username': current.username,
+			   'first_name': current.first_name,
+			   'last_name': current.last_name,
+			   'email': current.email,
+			   'img_src': img_path,
+			   'formp': formp,
+			   ##'passform' : passform
+			   }
 	return render(request, "UserProfile.html", context)
 	
 def user_register(request):
@@ -72,20 +84,3 @@ def user_register(request):
 	"""
 
 	return render(request, "Registration_page.html")
-
-def new_photo(request):
-	if request.method == 'POST':
-		formp = ChangeAvatar(request.POST, request.FILES)
-		if formp.is_valid():
-			(newph, created) = User.objects.get_or_create(user=get_user(request))
-			newph.image = formp.cleaned_data['photo']
-			newph.save()
-			messages.success(request, '¡se modificó su foto de perfil exitosamente!')
-			return render(request, "UserProfile.html", {'formp': formp})
-		messages.warning(request, 'Error, reintentelo')
-	
-	formp = ChangeAvatar()
-	return render(request, "UserProfile.html", {'formp': formp})
-
-
-
