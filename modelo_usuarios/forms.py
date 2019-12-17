@@ -46,14 +46,14 @@ class ChangeAvatar(forms.Form):
 class changePass(forms.Form):
 	old_pass = forms.CharField(label='Contraseña actual', widget=forms.PasswordInput(
 		attrs={'class': 'form_control',
-			   'placeholder': "contraseña nueva"}
+			   'placeholder': "************"}
 	))
 	new_pass = forms.CharField(label='Contraseña nueva', widget=forms.PasswordInput(
 		attrs={'class': 'form_control',
-			   'placeholder': "repita contraseña"}
+			   'placeholder': "ingrese contraseña"}
 	))
 	confirm_pass = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput(
 		attrs={'class': 'form_control',
-			   'placeholder': "***********"}
+			   'placeholder': "repita contraseña"}
 	))
 

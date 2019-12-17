@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from .forms import LogSession
 from .forms import ChangeAvatar
+from .forms import changePass
 
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -61,20 +62,35 @@ def user_profile(request):
 
 	if request.method == 'POST':
 		formp = ChangeAvatar(request.POST, request.FILES)
+		passform = changePass(request.POST)
+
+		if passform.is_valid():
+			oldp = passform.cleaned_data['old_pass']
+			newp = passform.cleaned_data['new_pass']
+			conp = passform.cleaned_data['confirm_pass']
+			username = request.user.username
+			user = authenticate(request, username = username, password = oldp)
+			if user is not None and oldp and newp and conp and newp == conp:
+				user.set_password(newp)
+				user.save()
+				return HttpResponseRedirect('http://127.0.0.1:8000')
+
 		if formp.is_valid():
 			(us, created) = Profile.objects.get_or_create(user=get_user(request))
 			us.profile_photo = formp.cleaned_data['photo']
 			us.save()
 			return HttpResponseRedirect('http://127.0.0.1:8000/profile')
 
+
 	formp = ChangeAvatar()
+	passform = changePass()
 	context = {'username': current.username,
 			   'first_name': current.first_name,
 			   'last_name': current.last_name,
 			   'email': current.email,
 			   'img_src': img_path,
 			   'formp': formp,
-			   ##'passform' : passform
+			   'passform' : passform
 			   }
 	return render(request, "UserProfile.html", context)
 	

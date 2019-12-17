@@ -136,27 +136,13 @@
 
                 <!--PESTAÑA SEGURIDAD-->
                 <div class="tab-pane fade show disabled" id="Seguridad" role="tabpanel" aria-labelledby="Seguridad-tab">
-                    <form>
+                    <form method="post" id="pw">
                         {% csrf_token %}
                         <!--Contraseña actual-->
                         <div class="form-group">
-                            <label for="actualPass">Contraseña actual:</label>
-                            {{ changePass.old_password }}
+                            {{ passform.as_ul}}
                         </div>
-
-                        <!--Contraseña nueva-->
-                        <div class="form-group">
-                            <label for="newPass">Nueva Contraseña</label>
-                            {{ changePass.new_password }}
-                        </div>
-
-                        <!--Contraseña confirmacion-->
-                        <div class="form-group">
-                            <label for="renewPass">Confirmación Contraseña</label>
-                            {{ changePass.confirm_password }}
-                        </div>
-
-                        <button type="submit" class="btn btn-success">Cambiar contraseña</button>
+                        <button type="submit" value="submit" class="btn btn-success">Cambiar contraseña</button>
                     </form>
 
                 </div>
