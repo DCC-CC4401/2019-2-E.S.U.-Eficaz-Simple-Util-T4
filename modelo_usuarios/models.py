@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Avg, StdDev
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -19,7 +20,7 @@ Estadísticas (#U.correo, #categoría, tiempo, desviación estándar)
 
 def profile_photo_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/photo/user_<id>/<filename>
-    return 'profile_photo/user_{0}/{1}'.format(instance.usuario.id, filename)
+    return 'profile_photo/user_{0}/{1}'.format(instance.user.id, filename)
 
 class Profile(models.Model):
     '''
@@ -28,6 +29,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # username, password, email, first_name, last_name
     profile_photo = models.ImageField(upload_to=profile_photo_path, null=True)
     # tiempo_conexion = models.DateField(auto_now=True)  ---> está implementado en DJANGO
+
 
 
 class Category(models.Model):

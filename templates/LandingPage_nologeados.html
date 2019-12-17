@@ -55,17 +55,16 @@
     </div>
 
 
-    <div class="site-blocks-cover overlay" style="background-image: url(images/hero_2.jpg);" data-aos="fade" id="home-section">
+    <div class="site-blocks-cover overlay" data-aos="fade" id="home-section">
 
         <div class="row align-items-center justify-content-center">
-
                <form method="POST" class="text-center text-dark" style="width: 450px;height: 626px;margin: 0px;padding: 20px;filter: blur(0px) brightness(100%); float: right">
 				{% csrf_token %}
                 <h1>ESU TimeTracker!!</h1>
                 <input class="form-control" type="email" name="email" placeholder="Email" style="height: 60px; width: 400px; margin: 10px; " />
                 <input class="form-control" type="password" name="password" placeholder="Password" style="height: 60px; width: 400px; margin: 10px; "/>
                 <button class="btn btn-primary" type="submit" style="width: 400px;color: #000000;font-size: 19px;">Ingresar</button>
-                <a href="#" >Crear cuenta</a></form>
+                <a href="register/" >Crear cuenta</a></form>
 
           </div>
 
