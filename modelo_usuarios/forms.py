@@ -43,7 +43,7 @@ class CustomUserCreationForm(forms.Form):
     email = forms.EmailField(label='Enter email')
     password1 = forms.CharField(label='Enter password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
-    profilePicture = forms.ImageField(label='imagen de usuario')
+    profilePicture = forms.ImageField(label='imagen de usuario', required=False)
     def clean_first_name(self):
         first_name = self.cleaned_data['first_name']
 
