@@ -82,10 +82,9 @@ def new_photo(request):
 			newph.save()
 			messages.success(request, '¡se modificó su foto de perfil exitosamente!')
 			return render(request, "UserProfile.html", {'formp': formp})
-		messages.warning(
-			request,
-			'Error, reintentelo'
-		)
+		messages.warning(request, 'Error, reintentelo')
+	
+	formp = ChangeAvatar()
 	return render(request, "UserProfile.html", {'formp': formp})
 
 
