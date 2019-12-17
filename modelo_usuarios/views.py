@@ -1,11 +1,10 @@
-from django.contrib import messages
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 from django.shortcuts import redirect
-from .forms import LogSession, CustomUserCreationForm
-from django.contrib.auth.models import User
-
-
+from .forms import CustomUserCreationForm
+from .models import Profile
+from django.contrib.staticfiles.templatetags.staticfiles import static
+from .forms import LogSession
 
 # Create your views here.
 
@@ -21,28 +20,42 @@ def home_unsigned(request):
 				login(request, user)
 				return redirect('http://127.0.0.1:8000/home/')
 			else:
-				log_form = LogSession() 
-				#Should raise error in the CSS	
+				log_form = LogSession()
+				#Should raise error in the CSS
 	else:
 		log_form = LogSession()
-			
+
 	return render(request, "LandingPage_nologeados.html")
 
 def home_user(request):
 	"""
 	Logic for the logged account's landing page goes here
 	"""
-	
-	
-	return render(request, "LandingPage_logeado.html")
-	
 
-	
+	return render(request, "LandingPage_logeado.html")
+
+
+
 def user_profile(request):
 	"""
 	Logic for the user profile page goes here
 	"""
-	
+	##Test this by connecting through "jalmarza@gmail.com"/"real_human" user
+	current = request.user
+	profile = Profile.objects.filter(user = current)[0]	#Obtain user profile
+
+	if not profile.profile_photo:	#Empty Image Field, loads default sprite
+		img_path = static("img/avatar.png")
+	else:
+		img_path = static(profile.profile_photo.path)
+
+	context = {'username': current.username,
+			 'first_name': current.first_name,
+			 'last_name': current.last_name,
+			 'email': current.email,
+			 'img_src': img_path
+			 }
+
 	return render(request, "UserProfile.html")
 
 
@@ -61,4 +74,3 @@ def user_register(request):
 		'form': f
 	}
 	return render(request, "Registration_page.html", context)
-
