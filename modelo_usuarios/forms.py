@@ -85,3 +85,24 @@ class CustomUserCreationForm(forms.Form):
         profile = Profile.objects.create(user=user, profile_photo=self.cleaned_data['profilePicture'])
         profile.save()
         return user
+
+class ChangeAvatar(forms.Form):
+	photo = forms.ImageField(label='', required=False, widget=forms.ClearableFileInput(
+		attrs={
+			'id': 'files',
+			'onchange': 'this.form.submit()'}
+	))
+
+class changePass(forms.Form):
+	old_pass = forms.CharField(label='Contraseña actual', widget=forms.PasswordInput(
+		attrs={'class': 'form_control',
+			   'placeholder': "************"}
+	))
+	new_pass = forms.CharField(label='Contraseña nueva', widget=forms.PasswordInput(
+		attrs={'class': 'form_control',
+			   'placeholder': "ingrese contraseña"}
+	))
+	confirm_pass = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput(
+		attrs={'class': 'form_control',
+			   'placeholder': "repita contraseña"}
+	))
