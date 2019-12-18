@@ -66,11 +66,12 @@ def user_profile(request):
 			else:
 				messages.error(request, 'Datos incorrectos, intentelo nuevamente.')
 
-
 		elif formp.is_valid():
 			(us, created) = Profile.objects.get_or_create(user=get_user(request))
 			us.profile_photo = formp.cleaned_data['photo']
 			us.save()
+			return HttpResponseRedirect('http://127.0.0.1:8000/profile')
+
 			
 	
 	## Obtains profile image
