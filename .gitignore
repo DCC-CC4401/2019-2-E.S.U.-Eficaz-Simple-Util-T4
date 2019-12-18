@@ -3,9 +3,14 @@
 
 # Pycharm stuff
 .idea/*
+__pycache__/
 
 # Virtual Environments
 venv/*
 
 # MAC OS
 .DS_Store
+
+*.sqlite3
+*.pyc
+

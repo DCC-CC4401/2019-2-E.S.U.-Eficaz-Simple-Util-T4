@@ -126,7 +126,3 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/bootstrap"),
     os.path.join(BASE_DIR, "static/Prototypes"),
 ]
-
-MEDIA_URL = '/profile_photo/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'profile_photo/')
-
