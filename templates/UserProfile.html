@@ -58,6 +58,13 @@
 
     <!--CONTENIDO PAGINA-->
     <div class="container-fluid p-4 main">
+        {% if messages %}
+                    <a class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                    </a>
+                {% endif %}
         <div class="row">
             <img src={{img_src}} class="circular mx-auto d-block shadow" height="250px">
         </div>
@@ -144,6 +151,7 @@
                         </div>
                         <button type="submit" value="submit" class="btn btn-success">Cambiar contraseña</button>
                     </form>
+
 
                 </div>
 

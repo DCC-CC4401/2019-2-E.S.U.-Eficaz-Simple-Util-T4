@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user
 from django.db.models.signals import post_save
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 # Create your views here.
 
@@ -66,7 +67,11 @@ def user_profile(request):
 			if user is not None and oldp and newp and conp and newp == conp:
 				user.set_password(newp)
 				user.save()
-				return HttpResponseRedirect('http://127.0.0.1:8000')
+				messages.success(request, 'Cambio exitoso.')
+				return HttpResponseRedirect('http://127.0.0.1:8000/profile/')
+			else:
+				messages.error(request, 'Datos incorrectos, intentelo nuevamente.')
+				return HttpResponseRedirect('http://127.0.0.1:8000/profile/')
 
 		if formp.is_valid():
 			(us, created) = Profile.objects.get_or_create(user=get_user(request))
