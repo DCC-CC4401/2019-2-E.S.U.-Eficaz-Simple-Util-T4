@@ -20,7 +20,7 @@ Estadísticas (#U.correo, #categoría, tiempo, desviación estándar)
 
 def profile_photo_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/photo/user_<id>/<filename>
-    return 'profile_photo/user_{0}/{1}'.format(instance.user.id, filename)
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
 
 class Profile(models.Model):
     '''
