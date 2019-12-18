@@ -12,6 +12,7 @@ from django.contrib.auth import get_user
 from django.db.models.signals import post_save
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+import pdb
 
 # Create your views here.
 
@@ -59,6 +60,7 @@ def user_profile(request):
 		passform = changePass(request.POST)
 
 		if passform.is_valid():
+			#pdb.set_trace()
 			oldp = passform.cleaned_data['old_pass']
 			newp = passform.cleaned_data['new_pass']
 			conp = passform.cleaned_data['confirm_pass']
@@ -68,17 +70,16 @@ def user_profile(request):
 				user.set_password(newp)
 				user.save()
 				messages.success(request, 'Cambio exitoso.')
-				return HttpResponseRedirect('http://127.0.0.1:8000/profile/')
+
 			else:
 				messages.error(request, 'Datos incorrectos, intentelo nuevamente.')
-				return HttpResponseRedirect('http://127.0.0.1:8000/profile/')
 
-		if formp.is_valid():
+
+		elif formp.is_valid():
 			(us, created) = Profile.objects.get_or_create(user=get_user(request))
 			us.profile_photo = formp.cleaned_data['photo']
 			us.save()
-			return HttpResponseRedirect('http://127.0.0.1:8000/profile')
-
+			
 	formp = ChangeAvatar()
 	passform = changePass()
 	context = {'username': current.username,
