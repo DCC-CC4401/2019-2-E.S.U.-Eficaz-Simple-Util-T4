@@ -13,6 +13,7 @@ from django.db.models.signals import post_save
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
+import pdb
 # Create your views here.
 
 def home_unsigned(request):
@@ -47,7 +48,6 @@ def user_profile(request):
 	"""
 	Logic for the user profile page goes here
 	"""
-		
 	if request.method == 'POST':
 		formp = ChangeAvatar(request.POST, request.FILES)
 		passform = changePass(request.POST)
@@ -61,11 +61,12 @@ def user_profile(request):
 			if user is not None and oldp and newp and conp and newp == conp:
 				user.set_password(newp)
 				user.save()
+				login(request, user)
 				messages.success(request, 'Cambio exitoso.')
 
 			else:
-				messages.error(request, 'Datos incorrectos, intentelo nuevamente.')
-
+				messages.error(request, 'Datos incorrectos, intentelo nuevamente.')	
+		
 		elif formp.is_valid():
 			(us, created) = Profile.objects.get_or_create(user=get_user(request))
 			us.profile_photo = formp.cleaned_data['photo']
